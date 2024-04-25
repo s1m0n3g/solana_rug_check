@@ -1,3 +1,11 @@
+import pyperclip
+import webbrowser
+from termcolor import colored
+import os
+import re
+import time
+import sys
+
 # Set error color for better visibility
 error_color = 'red'
 ok_color = 'green'
@@ -50,17 +58,17 @@ def clear_clipboard():
 def check_clipboard():
     global opened_codes, clipboard_error_shown
 
-    # Retry until the clipboard is accessible
+    # Retry until clipboard is accessible
     while True:
         try:
             # Get the current clipboard content
             current_clipboard = pyperclip.paste()
-            break  # If we successfully got the clipboard content, exit the retry loop
+            break  # If we successfully got clipboard content, exit retry loop
         except pyperclip.PyperclipException as e:
             print(colored(f"Error accessing clipboard: {e}. Retrying in 5 seconds...", error_color))
             time.sleep(5)  # Wait for 5 seconds before retrying
 
-    # Continue with the rest of the logic as before
+    # Continue with rest of the logic as before
     # Validate clipboard content using a regular expression
     if not re.match(r"^[a-zA-Z0-9]+$", current_clipboard):
         if not clipboard_error_shown:
