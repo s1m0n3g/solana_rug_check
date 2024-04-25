@@ -1,11 +1,3 @@
-import pyperclip
-import webbrowser
-from termcolor import colored
-import os
-import re
-import time
-import sys
-
 # Set error color for better visibility
 error_color = 'red'
 ok_color = 'green'
@@ -22,7 +14,7 @@ last_copied_time = {}
 # Variable to track clipboard error
 clipboard_error_shown = False
 
-# Aggiungi questa variabile per memorizzare il timestamp dell'ultimo avviso
+# Add this variable to store the timestamp of the last warning
 last_warning_time = {}
 
 def setup_sites():
@@ -58,17 +50,17 @@ def clear_clipboard():
 def check_clipboard():
     global opened_codes, clipboard_error_shown
 
-    # Riprova fino a quando il clipboard non è accessibile
+    # Retry until the clipboard is accessible
     while True:
         try:
             # Get the current clipboard content
             current_clipboard = pyperclip.paste()
-            break  # Se siamo riusciti a ottenere il contenuto del clipboard, esci dal ciclo di riprova
+            break  # If we successfully got the clipboard content, exit the retry loop
         except pyperclip.PyperclipException as e:
             print(colored(f"Error accessing clipboard: {e}. Retrying in 5 seconds...", error_color))
-            time.sleep(5)  # Attendere 5 secondi prima di riprovare
+            time.sleep(5)  # Wait for 5 seconds before retrying
 
-    # Continua con il resto della logica come prima
+    # Continue with the rest of the logic as before
     # Validate clipboard content using a regular expression
     if not re.match(r"^[a-zA-Z0-9]+$", current_clipboard):
         if not clipboard_error_shown:
@@ -89,7 +81,7 @@ def check_clipboard():
         if current_clipboard not in last_warning_time or current_time - last_warning_time[current_clipboard] > 60:
             print(colored("Warning: This token has been opened within the last minute.", 'yellow'))
             print(colored(f"Token: {current_clipboard}", 'yellow'))  # Print the token in yellow
-            last_warning_time[current_clipboard] = current_time  # Aggiorna il timestamp dell'ultimo avviso
+            last_warning_time[current_clipboard] = current_time  # Update the timestamp of the last warning
         return
 
     # Reset clipboard error flag
@@ -155,7 +147,7 @@ if __name__ == '__main__':
             while True:
                 # Check the clipboard
                 check_clipboard()
-                time.sleep(1)  # Aggiungi un ritardo di 1 secondo tra le verifiche del clipboard
+                time.sleep(1)  # Add a 1-second delay between clipboard checks
 
         except KeyboardInterrupt:
             print(colored("Returning to the menu...", 'yellow'))
