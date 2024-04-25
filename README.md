@@ -8,6 +8,8 @@ For example, if you follow a Telegram channel and click on a referral token, as 
 
 ## ## Requirements ## ##
 
+```
 pip install -r requirements.txt
+```
 
 
