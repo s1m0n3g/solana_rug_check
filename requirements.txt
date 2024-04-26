@@ -1,3 +1,3 @@
-pyperclip>=3.0
+pyperclip
 termcolor
 requests
