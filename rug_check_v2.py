@@ -109,6 +109,9 @@ def check_clipboard():
         for site in selected_sites:
             open_url(site, current_clipboard)
 
+        # Wait for 30 seconds before clearing the clipboard
+        time.sleep(30)
+
         # Clear the clipboard after opening URLs
         clear_clipboard()
     except Exception as e:
