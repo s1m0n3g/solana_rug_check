@@ -23,6 +23,10 @@ python rug_check_v2.py
 # How it appears
 ![screenshot](https://github.com/s1m0n3g/solana_rug_check/assets/41329914/10f33582-02ed-4099-ae8a-c0be54a19ebd)
 
+# Warnings
+
+Becareful: do not copy private info (such as private keys), or they will be passed to the websites selected. Anyone is responsible for an improper usage.
+
 # Donation & support
 SOL wallet: 
 ```
