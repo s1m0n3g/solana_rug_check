@@ -83,11 +83,11 @@ def check_clipboard():
         clipboard_error_shown = True
         return
 
-    # Check if the code has been copied in the last minute
+    # Check if the code has been copied in the last few seconds
     current_time = time.time()
-    if current_clipboard in last_copied_time and current_time - last_copied_time[current_clipboard] < 60:
-        if current_clipboard not in last_warning_time or current_time - last_warning_time[current_clipboard] > 60:
-            print(colored("Warning: This token has been opened within the last minute.", 'yellow'))
+    if current_clipboard in last_copied_time and current_time - last_copied_time[current_clipboard] < 10:
+        if current_clipboard not in last_warning_time or current_time - last_warning_time[current_clipboard] > 10:
+            print(colored("Warning: This token has been opened within the few seconds.", 'yellow'))
             print(colored(f"Token: {current_clipboard}", 'yellow'))  # Print the token in yellow
             last_warning_time[current_clipboard] = current_time  # Update the timestamp of the last warning
         return
@@ -110,7 +110,7 @@ def check_clipboard():
             open_url(site, current_clipboard)
 
         # Wait for 30 seconds before clearing the clipboard
-        time.sleep(30)
+        time.sleep(1)
 
         # Clear the clipboard after opening URLs
         clear_clipboard()
